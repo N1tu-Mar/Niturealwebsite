@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NITU. — Nityanth Maramreddy</title>
+  <title>MEET NITU!</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 
   <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -36,7 +36,7 @@
             'red-glow': 'rgba(232,25,44,0.15)',
             cyan: '#00d4ff',
             'cyan-dim': 'rgba(0,212,255,0.12)',
-            muted: '#5a5a5a',
+            muted: '#7a7a7a',
             subtle: '#333333',
             offwhite: '#f0ede8',
           },
@@ -64,8 +64,8 @@
       --cyan-dim: rgba(0,212,255,0.08);
       --base: #080808;
       --offwhite: #f0ede8;
-      --muted: #5a5a5a;
-      --subtle: #222222;
+      --muted: #7a7a7a;
+      --subtle: #333333;
     }
 
     html { scroll-behavior: smooth; background-color: var(--base); }
@@ -134,15 +134,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(8,8,8,0.6);
+      background: rgba(8,8,8,0.75);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       transition: background 0.3s ease, border-color 0.3s ease;
     }
     #navbar.scrolled {
-      background: rgba(8,8,8,0.88);
-      border-bottom-color: rgba(232,25,44,0.15);
+      background: rgba(8,8,8,0.92);
+      border-bottom-color: rgba(232,25,44,0.2);
     }
 
     .nav-logo {
@@ -299,6 +299,16 @@
     section {
       position: relative;
       z-index: 1;
+      background: rgba(8,8,8,0.82);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    /* ─── CONTENT BOLDENING (readability over PixelBlast bg) ── */
+    footer {
+      background: rgba(8,8,8,0.88);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
 
     /* ─── SCROLL REVEAL ANIMATIONS ──────────────────── */
@@ -377,6 +387,7 @@
       font-family: 'Bebas Neue', sans-serif;
       line-height: 0.92;
       letter-spacing: 0.02em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
     }
 
     /* Hero text entrance animations */
@@ -386,7 +397,6 @@
       display: block;
       opacity: 0;
       transform: translateY(60px) skewY(-2deg);
-      animation: heroLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
     .hero-line-2 {
       font-size: clamp(4rem, 8vw, 8rem);
@@ -395,10 +405,18 @@
       position: relative;
       opacity: 0;
       transform: translateY(60px) skewY(-2deg);
-      animation: heroLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
     }
-    @keyframes heroLine {
-      to { opacity: 1; transform: translateY(0) skewY(0deg); }
+
+    /* Typing cursor */
+    .hero-cursor {
+      display: inline-block;
+      color: var(--offwhite);
+      margin-left: 2px;
+      animation: cursorBlink 0.6s steps(1) infinite;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
     }
 
     /* Red glow behind accent text */
@@ -415,8 +433,8 @@
 
     .hero-sub {
       font-size: 1rem;
-      font-weight: 300;
-      color: var(--muted);
+      font-weight: 400;
+      color: #8a8a8a;
       line-height: 1.7;
       margin-top: 2rem;
       max-width: 480px;
@@ -425,7 +443,7 @@
     }
     .hero-sub strong {
       color: var(--offwhite);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .hero-ctas {
@@ -588,6 +606,149 @@
       z-index: 3;
     }
 
+
+    /* ProfileCard */
+    .pc-card-wrapper {
+      perspective: 500px; transform: translate3d(0,0,0.1px);
+      position: relative; touch-action: none;
+      --pointer-x:50%; --pointer-y:50%; --pointer-from-center:0;
+      --pointer-from-top:0.5; --pointer-from-left:0.5; --card-opacity:0;
+      --rotate-x:0deg; --rotate-y:0deg; --background-x:50%; --background-y:50%;
+      --grain:none; --icon:none; --behind-glow-color:rgba(232,25,44,0.55);
+      --behind-glow-size:50%;
+      --inner-gradient:linear-gradient(145deg,rgba(232,25,44,0.18) 0%,rgba(0,0,0,0.55) 100%);
+      --sunpillar-1:hsl(2,100%,73%); --sunpillar-2:hsl(53,100%,69%);
+      --sunpillar-3:hsl(93,100%,69%); --sunpillar-4:hsl(176,100%,76%);
+      --sunpillar-5:hsl(228,100%,74%); --sunpillar-6:hsl(283,100%,73%);
+      --sunpillar-clr-1:var(--sunpillar-1); --sunpillar-clr-2:var(--sunpillar-2);
+      --sunpillar-clr-3:var(--sunpillar-3); --sunpillar-clr-4:var(--sunpillar-4);
+      --sunpillar-clr-5:var(--sunpillar-5); --sunpillar-clr-6:var(--sunpillar-6);
+      --card-radius:22px;
+    }
+    .pc-card-wrapper:hover,.pc-card-wrapper.active{--card-opacity:1;}
+    .pc-behind {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      background:radial-gradient(circle at var(--pointer-x) var(--pointer-y),var(--behind-glow-color) 0%,transparent var(--behind-glow-size));
+      filter:blur(50px) saturate(1.1);
+      opacity:calc(0.8 * var(--card-opacity)); transition:opacity 200ms ease;
+    }
+    .pc-card-shell{position:relative; z-index:1;}
+    .pc-card {
+      height:80svh; max-height:520px; display:grid; aspect-ratio:0.718;
+      border-radius:var(--card-radius); position:relative;
+      box-shadow:rgba(0,0,0,0.8) calc((var(--pointer-from-left)*10px) - 3px) calc((var(--pointer-from-top)*20px) - 6px) 20px -5px;
+      transition:transform 1s ease;
+      transform:translateZ(0) rotateX(0deg) rotateY(0deg);
+      background:rgba(0,0,0,0.9); backface-visibility:hidden; overflow:hidden;
+      animation:pc-glow-bg 12s linear infinite;
+    }
+    .pc-card:hover,.pc-card.active{transition:none; transform:translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));}
+    .pc-card-shell.entering .pc-card{transition:transform 180ms ease-out;}
+    .pc-card *{display:grid; grid-area:1/-1; border-radius:var(--card-radius); pointer-events:none;}
+    .pc-inside{inset:0; position:absolute; background-image:var(--inner-gradient); background-color:rgba(0,0,0,0.9); transform:none;}
+    .pc-shine {
+      mask-image:var(--icon); mask-mode:luminance; mask-repeat:repeat; mask-size:150%;
+      mask-position:top calc(200% - (var(--background-y)*5)) left calc(100% - var(--background-x));
+      transition:filter 0.8s ease; filter:brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
+      animation:pc-holo-bg 18s linear infinite; animation-play-state:running; mix-blend-mode:color-dodge;
+    }
+    .pc-shine,.pc-shine::after {
+      --space:5%; --angle:-45deg;
+      transform:translate3d(0,0,1px); overflow:hidden; z-index:3;
+      background:transparent; background-size:cover; background-position:center;
+      background-image:
+        repeating-linear-gradient(0deg,
+          var(--sunpillar-clr-1) calc(var(--space)*1),var(--sunpillar-clr-2) calc(var(--space)*2),
+          var(--sunpillar-clr-3) calc(var(--space)*3),var(--sunpillar-clr-4) calc(var(--space)*4),
+          var(--sunpillar-clr-5) calc(var(--space)*5),var(--sunpillar-clr-6) calc(var(--space)*6),
+          var(--sunpillar-clr-1) calc(var(--space)*7)),
+        repeating-linear-gradient(var(--angle),
+          #0e152e 0%,hsl(180,10%,60%) 3.8%,hsl(180,29%,66%) 4.5%,
+          hsl(180,10%,60%) 5.2%,#0e152e 10%,#0e152e 12%),
+        radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),
+          hsla(0,0%,0%,0.1) 12%,hsla(0,0%,0%,0.15) 20%,hsla(0,0%,0%,0.25) 120%);
+      background-position:0 var(--background-y),var(--background-x) var(--background-y),center;
+      background-blend-mode:color,hard-light; background-size:500% 500%,300% 300%,200% 200%; background-repeat:repeat;
+    }
+    .pc-shine::before,.pc-shine::after{content:""; background-position:center; background-size:cover; grid-area:1/1; opacity:0; transition:opacity 0.8s ease;}
+    .pc-card:hover .pc-shine,.pc-card.active .pc-shine{filter:brightness(0.85) contrast(1.5) saturate(0.5); animation-play-state:paused;}
+    .pc-card:hover .pc-shine::before,.pc-card.active .pc-shine::before,
+    .pc-card:hover .pc-shine::after,.pc-card.active .pc-shine::after{opacity:1;}
+    .pc-shine::before {
+      background-image:
+        linear-gradient(45deg,var(--sunpillar-4),var(--sunpillar-5),var(--sunpillar-6),var(--sunpillar-1),var(--sunpillar-2),var(--sunpillar-3)),
+        radial-gradient(circle at var(--pointer-x) var(--pointer-y),hsl(0,0%,70%) 0%,hsla(0,0%,30%,0.2) 90%),
+        var(--grain);
+      background-size:250% 250%,100% 100%,220px 220px;
+      background-position:var(--pointer-x) var(--pointer-y),center,calc(var(--pointer-x)*0.01) calc(var(--pointer-y)*0.01);
+      background-blend-mode:color-dodge;
+      filter:brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2)) saturate(calc(0.5 + var(--pointer-from-center)));
+      mix-blend-mode:luminosity;
+    }
+    .pc-shine::after {
+      background-position:0 var(--background-y),calc(var(--background-x)*0.4) calc(var(--background-y)*0.5),center;
+      background-size:200% 300%,700% 700%,100% 100%;
+      mix-blend-mode:difference; filter:brightness(0.8) contrast(1.5);
+    }
+    .pc-glare {
+      transform:translate3d(0,0,1.1px); overflow:hidden;
+      background-image:radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),hsl(248,25%,80%) 12%,hsla(207,40%,30%,0.8) 90%);
+      mix-blend-mode:overlay; filter:brightness(0.8) contrast(1.2); z-index:4;
+    }
+    .pc-avatar-content{overflow:hidden; position:absolute; inset:0; z-index:2; backface-visibility:hidden; display:block !important;}
+    .pc-avatar-content .pc-avatar-img {
+      display:block !important; width:100%; height:100%; position:absolute; left:0; top:0;
+      transform:translateZ(0);
+      backface-visibility:hidden; will-change:transform; transition:transform 120ms ease-out;
+      object-fit:cover; object-position:center 15%;
+    }
+    .pc-user-info {
+      position:absolute !important; --ui-inset:16px; --ui-radius-bias:6px;
+      bottom:var(--ui-inset); left:var(--ui-inset); right:var(--ui-inset); z-index:2;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(255,255,255,0.1); backdrop-filter:blur(30px);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)));
+      padding:10px 12px; pointer-events:auto;
+    }
+    .pc-user-details{display:flex; align-items:center; gap:10px;}
+    .pc-mini-avatar{width:40px; height:40px; border-radius:50%; overflow:hidden; border:1px solid rgba(255,255,255,0.15); flex-shrink:0;}
+    .pc-mini-avatar img{display:block !important; width:100%; height:100%; object-fit:cover; object-position:center 10%; border-radius:50%;}
+    .pc-user-text{display:flex; align-items:flex-start; flex-direction:column; gap:4px;}
+    .pc-handle{font-size:13px; font-weight:500; color:rgba(255,255,255,0.9); line-height:1;}
+    .pc-status{font-size:12px; color:rgba(255,255,255,0.6); line-height:1;}
+    .pc-contact-btn {
+      border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px;
+      font-size:11px; font-weight:600; color:rgba(255,255,255,0.9);
+      cursor:pointer; transition:all 0.2s ease; backdrop-filter:blur(10px);
+      background:rgba(232,25,44,0.25); font-family:inherit; letter-spacing:0.05em;
+    }
+    .pc-contact-btn:hover{border-color:rgba(232,25,44,0.8); transform:translateY(-1px); background:rgba(232,25,44,0.45);}
+    .pc-content:not(.pc-avatar-content) {
+      max-height:100%; overflow:hidden; text-align:center; position:relative;
+      transform:translate3d(calc(var(--pointer-from-left)*-6px + 3px),calc(var(--pointer-from-top)*-6px + 3px),0.1px);
+      z-index:5; mix-blend-mode:luminosity;
+    }
+    .pc-details{width:100%; position:absolute; top:2.5em; display:flex; flex-direction:column;}
+    .pc-details h3 {
+      font-weight:600; margin:0; font-size:min(5svh,2.8em);
+      background-image:linear-gradient(to bottom,#fff,#6f6fbe);
+      background-size:1em 1.5em; -webkit-text-fill-color:transparent;
+      background-clip:text; -webkit-background-clip:text;
+    }
+    .pc-details p {
+      font-weight:600; position:relative; top:-10px; white-space:nowrap;
+      font-size:14px; margin:0 auto; width:min-content;
+      background-image:linear-gradient(to bottom,#fff,#c0504a);
+      background-size:1em 1.5em; -webkit-text-fill-color:transparent;
+      background-clip:text; -webkit-background-clip:text;
+    }
+    @keyframes pc-glow-bg{0%{--bgrotate:0deg;}100%{--bgrotate:360deg;}}
+    @keyframes pc-holo-bg{
+      0%{background-position:0 var(--background-y),0 0,center;}
+      100%{background-position:0 var(--background-y),90% 90%,center;}
+    }
+
     /* Scroll indicator */
     .scroll-hint {
       position: absolute;
@@ -663,6 +824,7 @@
       line-height: 0.95;
       color: var(--offwhite);
       margin-bottom: 4rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
 
     /* About grid */
@@ -675,13 +837,13 @@
 
     .about-bio {
       font-size: 1.05rem;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.85;
-      color: #8a8a8a;
+      color: #9a9a9a;
     }
     .about-bio strong {
       color: var(--offwhite);
-      font-weight: 500;
+      font-weight: 600;
     }
     .about-bio em {
       color: var(--red);
@@ -692,13 +854,14 @@
     .stats-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
       margin-top: 3rem;
+      background: rgba(8,8,8,0.6);
     }
 
     .stat-item {
       padding: 1.75rem 1.5rem;
-      border-right: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.1);
       position: relative;
     }
     .stat-item:last-child { border-right: none; }
@@ -744,12 +907,12 @@
       display: inline-block;
       padding: 0.4rem 0.85rem;
       font-size: 0.65rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #aaaaaa;
-      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #bbbbbb;
+      background: rgba(255,255,255,0.04);
       transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
       cursor: default;
     }
@@ -770,8 +933,8 @@
 
     /* About terminal card */
     .about-terminal {
-      background: #0d0d0d;
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(13,13,13,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
       border-left: 2px solid var(--red);
       padding: 1.5rem;
       margin-top: 2rem;
@@ -787,7 +950,7 @@
     .terminal-row:last-child { margin-bottom: 0; }
     .t-prompt { color: var(--red); font-weight: 600; flex-shrink: 0; }
     .t-key { color: #aaaaaa; font-weight: 500; flex-shrink: 0; min-width: 80px; }
-    .t-val { color: #666; }
+    .t-val { color: #888; }
     .t-val.lit { color: var(--offwhite); }
     .t-val.red { color: var(--red); }
     .t-val.cyan { color: var(--cyan); }
@@ -812,13 +975,13 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       margin-top: 1rem;
     }
 
     .project-card {
-      background: var(--base);
+      background: rgba(8,8,8,0.95);
       padding: 2.5rem;
       position: relative;
       overflow: hidden;
@@ -881,6 +1044,7 @@
       color: var(--offwhite);
       line-height: 1;
       margin-bottom: 0.5rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
 
     .project-role {
@@ -894,12 +1058,12 @@
 
     .project-desc {
       font-size: 0.875rem;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.75;
-      color: #666;
+      color: #888;
       margin-bottom: 1.75rem;
     }
-    .project-desc strong { color: #999; font-weight: 500; }
+    .project-desc strong { color: #bbb; font-weight: 600; }
 
     .project-stack {
       display: flex;
@@ -917,11 +1081,11 @@
     }
     .stack-item {
       font-size: 0.6rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
-      color: #555;
+      color: #888;
       padding: 0.2rem 0.5rem;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     /* project number */
@@ -1025,6 +1189,7 @@
       color: var(--offwhite);
       line-height: 1;
       margin-bottom: 0.35rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
 
     .timeline-role {
@@ -1038,9 +1203,9 @@
 
     .timeline-desc {
       font-size: 0.85rem;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
-      color: #555;
+      color: #888;
     }
 
     /* Resume sidebar */
@@ -1052,8 +1217,8 @@
     }
 
     .download-block {
-      background: #0d0d0d;
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(13,13,13,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
       padding: 2rem;
       margin-bottom: 2rem;
     }
@@ -1105,23 +1270,24 @@
 
     .contact-sub {
       font-size: 1rem;
-      font-weight: 300;
-      color: var(--muted);
+      font-weight: 400;
+      color: #8a8a8a;
       line-height: 1.7;
       margin-bottom: 3rem;
     }
-    .contact-sub strong { color: var(--offwhite); font-weight: 500; }
+    .contact-sub strong { color: var(--offwhite); font-weight: 600; }
 
     /* Contact info cards */
     .contact-cards {
       display: flex;
       flex-direction: column;
       gap: 1px;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
     .contact-card {
-      background: var(--base);
+      background: rgba(8,8,8,0.95);
       padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
@@ -1147,7 +1313,7 @@
     }
     .contact-card-value {
       font-size: 0.85rem;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--offwhite);
       letter-spacing: 0.02em;
     }
@@ -1184,12 +1350,12 @@
     .form-input,
     .form-textarea {
       width: 100%;
-      background: #0d0d0d;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(13,13,13,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
       color: var(--offwhite);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.9rem;
-      font-weight: 300;
+      font-weight: 400;
       padding: 0.85rem 1rem;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1491,8 +1657,8 @@
       <div class="home-label">Portfolio 2026</div>
 
       <h1 class="hero-heading">
-        <span class="hero-line-1">BUILDING THINGS</span>
-        <span class="hero-line-2" data-text="THAT MATTER.">THAT MATTER.</span>
+        <span class="hero-line-1"></span>
+        <span class="hero-line-2" data-text=""><span class="hero-cursor">_</span></span>
       </h1>
 
       <p class="hero-sub">
@@ -1513,14 +1679,39 @@
       </div>
     </div>
 
-    <!-- Right: Photo -->
+    <!-- Right: ProfileCard -->
     <div class="hero-photo-wrap">
-      <div class="hero-photo-frame">
-        <div class="hero-photo-inner">
-          <!-- PROFILE PHOTO -->
-          <img src="./Screenshot 2026-03-28 at 1.15.25 AM.png"height="100%" width="80%"alt="Nityanth Maramreddy" />
+      <div class="pc-card-wrapper">
+        <div class="pc-behind"></div>
+        <div class="pc-card-shell" id="pc-shell">
+          <section class="pc-card">
+            <div class="pc-inside">
+              <div class="pc-shine"></div>
+              <div class="pc-glare"></div>
+              <div class="pc-content pc-avatar-content">
+                <img class="pc-avatar-img" src="./nitu-profile.png" alt="Nityanth Maramreddy" loading="lazy" />
+                <div class="pc-user-info">
+                  <div class="pc-user-details">
+                    <div class="pc-mini-avatar">
+                      <img src="./nitu-profile.png" alt="Nitu mini" loading="lazy" />
+                    </div>
+                    <div class="pc-user-text">
+                      <div class="pc-handle">@nitu</div>
+                      <div class="pc-status">Open to opportunities</div>
+                    </div>
+                  </div>
+                  <button class="pc-contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" type="button">Contact Me</button>
+                </div>
+              </div>
+              <div class="pc-content">
+                <div class="pc-details">
+                  <h3>Nityanth</h3>
+                  <p>CS + Neuro @ Rutgers</p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <div class="photo-tag">Rutgers · CS + Neuro</div>
       </div>
     </div>
   </div>
@@ -1551,7 +1742,7 @@
       <!-- Left: Bio + Stats -->
       <div class="reveal-left delay-2">
         <p class="about-bio">
-          Hey! I'm <strong>Nitu</strong> — a Neuroscience &amp; Computer Science student at
+          Hey! I'm <strong>Nitu.</strong> I'm a Neuroscience &amp; Computer Science student at
           <strong>Rutgers</strong> (GPA: <em>3.93</em>) with an unconventional path.
           I started Pre-med, but realized I wanted to spend my life
           <strong>building things that create real impact at scale.</strong>
@@ -1621,7 +1812,7 @@
           <div class="terminal-row">
             <span class="t-prompt">$</span>
             <span class="t-key">status</span>
-            <span class="t-val lit">[OPEN TO OPPORTUNITIES]</span>
+            <span class="t-val lit">[BUILDING]</span>
           </div>
         </div>
 
@@ -1660,7 +1851,7 @@
           <div class="project-role">Founder &amp; CEO</div>
           <p class="project-desc">
             Building full-scale video games where kids learn reading, writing, and speech
-            through core gameplay — think <strong>Mario and Zelda, but educational.</strong>
+            through core gameplay! Think <strong>Mario and Zelda, but educational.</strong>
             Leading development of an RPG platformer with speech-input spell mechanics.
             Scaled to <strong>YMCA locations across NJ</strong>, libraries in Plainsboro,
             Princeton, New Brunswick. <strong>Expanding into NYC.</strong>
@@ -1687,7 +1878,7 @@
           <div class="project-title">UniFlow</div>
           <div class="project-role">Head of Campus Ambassadors</div>
           <p class="project-desc">
-            Real-time platform for cross-campus facility availability — parking, gyms,
+            Real-time platform for cross-campus facility availability, parking, gyms,
             libraries, dining halls. <strong>Partnered with Rutgers Dept. of Recreation</strong>
             for live data. Team placed <strong>3rd at TechStart RSVP Pitch Competition.</strong>
           </p>
@@ -1711,7 +1902,7 @@
           <div class="project-role">Developer</div>
           <p class="project-desc">
             Mobile app for hospital CNAs and nurses. <strong>OCR scans a vitals monitor
-            in under 10 seconds</strong> and auto-charts into Epic and EHR systems —
+            in under 10 seconds</strong> and auto-charts into Epic and EHR systems. Goal was to start
             <strong>saving 45 min/shift.</strong> Includes digital shift handoffs and
             patient behavior logs.
           </p>
@@ -1745,10 +1936,12 @@
           <div class="project-title">(Un)announced</div>
           <div class="project-role">Developer + Studio Head</div>
           <p class="project-desc">
-            Built the full website from scratch for <strong>(Un)announced</strong> — a Gen Z
+            Built the full website from scratch for <strong>(Un)announced!</strong> A Gen Z
             digital content house for LinkedIn creators. Now Studio Head, consulting
             <strong>Gen Z founders in SaaS, Fintech, EdTech, and Retail.</strong>
           </p>
+            <a href="https://unnanounced.netlify.app/#home" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);text-decoration:none;border-bottom:1px solid rgba(232,25,44,0.4);padding-bottom:2px;transition:color 0.2s ease,border-color 0.2s ease,gap 0.2s ease;" onmouseover="this.style.color='#ff3347';this.style.borderColor='var(--red)';this.style.gap='0.75rem'" onmouseout="this.style.color='var(--red)';this.style.borderColor='rgba(232,25,44,0.4)';this.style.gap='0.5rem'">See what's (un)announced <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
           <div class="project-stack">
             <span class="stack-label">Stack</span>
             <span class="stack-item">Tailwind CSS</span>
@@ -2362,6 +2555,157 @@ void main(){
     requestAnimationFrame(animate);
   };
   animate();
+})();
+</script>
+
+<!-- Hero Typing Animation -->
+<script>
+(function () {
+  const LINE1_TEXT = 'BUILDING THINGS';
+  const LINE2_TEXT = 'THAT MATTER.';
+  const TYPE_SPEED  = 55;   // ms per character (typing)
+  const DEL_SPEED   = 30;   // ms per character (deleting)
+  const PAUSE_AFTER = 2200; // ms pause when fully typed
+  const PAUSE_BETWEEN = 320; // ms gap between line1 done and line2 start
+
+  const line1 = document.querySelector('.hero-line-1');
+  const line2 = document.querySelector('.hero-line-2');
+  const cursor = document.querySelector('.hero-cursor');
+
+  if (!line1 || !line2 || typeof gsap === 'undefined') return;
+
+  // Set initial state for entrance animation
+  gsap.set(line1, { opacity: 0, y: 60, skewY: -2 });
+  gsap.set(line2, { opacity: 0, y: 60, skewY: -2 });
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function typeText(el, text, insertBeforeCursor) {
+    for (let i = 0; i < text.length; i++) {
+      if (insertBeforeCursor) {
+        // insert typed chars before the cursor span
+        const textNode = document.createTextNode(text[i]);
+        el.insertBefore(textNode, cursor);
+      } else {
+        el.textContent += text[i];
+      }
+      await sleep(TYPE_SPEED + (Math.random() * 20 - 10));
+    }
+  }
+
+  async function deleteText(el, insertBeforeCursor) {
+    while (true) {
+      if (insertBeforeCursor) {
+        // remove text nodes before cursor
+        let node = cursor.previousSibling;
+        if (!node || node.nodeType !== Node.TEXT_NODE) break;
+        if (node.textContent.length > 1) {
+          node.textContent = node.textContent.slice(0, -1);
+        } else {
+          el.removeChild(node);
+        }
+      } else {
+        if (!el.textContent) break;
+        el.textContent = el.textContent.slice(0, -1);
+      }
+      await sleep(DEL_SPEED);
+    }
+  }
+
+  function gsapTo(el, vars) {
+    return new Promise(resolve => gsap.to(el, { ...vars, onComplete: resolve }));
+  }
+
+  async function run() {
+    // Entrance: slide both lines in
+    await gsapTo(line1, { opacity: 1, y: 0, skewY: 0, duration: 0.9, ease: 'power3.out', delay: 0.15 });
+    await gsapTo(line2, { opacity: 1, y: 0, skewY: 0, duration: 0.9, ease: 'power3.out' });
+
+    while (true) {
+      // Type line 1
+      await typeText(line1, LINE1_TEXT, false);
+      await sleep(PAUSE_BETWEEN);
+
+      // Move cursor into line2, type line 2
+      line2.insertBefore(cursor, line2.firstChild); // ensure cursor is in line2
+      await typeText(line2, LINE2_TEXT, true);
+      // update data-text for glow ::after
+      line2.dataset.text = LINE2_TEXT;
+      await sleep(PAUSE_AFTER);
+
+      // Delete line 2
+      await deleteText(line2, true);
+      line2.dataset.text = '';
+      await sleep(PAUSE_BETWEEN);
+
+      // Delete line 1
+      await deleteText(line1, false);
+      await sleep(400);
+    }
+  }
+
+  // Kick off after page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+<!-- ProfileCard Tilt -->
+<script>
+(function () {
+  var ENTER_MS=180,DEFAULT_TAU=0.14,INITIAL_TAU=0.6,INITIAL_DUR=1200,INITIAL_X_OFF=70,INITIAL_Y_OFF=60;
+  function clamp(v,mn,mx){mn=mn===undefined?0:mn;mx=mx===undefined?100:mx;return Math.min(Math.max(v,mn),mx);}
+  function round(v,p){p=p===undefined?3:p;return parseFloat(v.toFixed(p));}
+  function adjust(v,fMin,fMax,tMin,tMax){return round(tMin+(tMax-tMin)*(v-fMin)/(fMax-fMin));}
+  var shell=document.getElementById('pc-shell');
+  var wrap=shell?shell.closest('.pc-card-wrapper'):null;
+  if(!shell||!wrap)return;
+  var rafId=null,running=false,lastTs=0,curX=0,curY=0,tgtX=0,tgtY=0,initialUntil=0;
+  function setVars(x,y){
+    var w=shell.clientWidth||1,h=shell.clientHeight||1;
+    var px=clamp((100/w)*x),py=clamp((100/h)*y),cx=px-50,cy=py-50;
+    var props={'--pointer-x':px+'%','--pointer-y':py+'%',
+      '--background-x':adjust(px,0,100,35,65)+'%','--background-y':adjust(py,0,100,35,65)+'%',
+      '--pointer-from-center':clamp(Math.hypot(py-50,px-50)/50,0,1),
+      '--pointer-from-top':py/100,'--pointer-from-left':px/100,
+      '--rotate-x':round(-(cx/5))+'deg','--rotate-y':round(cy/4)+'deg'};
+    for(var k in props)wrap.style.setProperty(k,props[k]);
+  }
+  function step(ts){
+    if(!running)return;if(!lastTs)lastTs=ts;
+    var dt=(ts-lastTs)/1000;lastTs=ts;
+    var tau=ts<initialUntil?INITIAL_TAU:DEFAULT_TAU,k=1-Math.exp(-dt/tau);
+    curX+=(tgtX-curX)*k;curY+=(tgtY-curY)*k;setVars(curX,curY);
+    if(Math.abs(tgtX-curX)>0.05||Math.abs(tgtY-curY)>0.05||document.hasFocus())rafId=requestAnimationFrame(step);
+    else{running=false;lastTs=0;if(rafId){cancelAnimationFrame(rafId);rafId=null;}}
+  }
+  function startRAF(){if(running)return;running=true;lastTs=0;rafId=requestAnimationFrame(step);}
+  function setTarget(x,y){tgtX=x;tgtY=y;startRAF();}
+  function toCenter(){setTarget(shell.clientWidth/2,shell.clientHeight/2);}
+  function offsets(e){var r=shell.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+  var enterTimer=null,leaveRaf=null;
+  shell.addEventListener('pointerenter',function(e){
+    shell.classList.add('active','entering');
+    if(enterTimer)clearTimeout(enterTimer);
+    enterTimer=setTimeout(function(){shell.classList.remove('entering');},ENTER_MS);
+    var o=offsets(e);setTarget(o.x,o.y);wrap.classList.add('active');
+  });
+  shell.addEventListener('pointermove',function(e){var o=offsets(e);setTarget(o.x,o.y);});
+  shell.addEventListener('pointerleave',function(){
+    toCenter();
+    function check(){
+      if(Math.hypot(tgtX-curX,tgtY-curY)<0.6){shell.classList.remove('active');wrap.classList.remove('active');leaveRaf=null;}
+      else leaveRaf=requestAnimationFrame(check);
+    }
+    if(leaveRaf)cancelAnimationFrame(leaveRaf);
+    leaveRaf=requestAnimationFrame(check);
+  });
+  curX=(shell.clientWidth||300)-INITIAL_X_OFF;curY=INITIAL_Y_OFF;
+  setVars(curX,curY);initialUntil=performance.now()+INITIAL_DUR;
+  toCenter();startRAF();
 })();
 </script>
 
